@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Touches</h1>
+
+<div class="touches-add">
+	<p><a href="{{ url_for('touches.add') }}">Add</a></p>
+</div>
+
+<div class="touches">
+{% for touch in touches %}
+<span class="date">{{ touch.date }}</span> | <span class="description">{{ touch.description }}</span>
+{% endfor %}
+</div>
+
+{% endblock %}
