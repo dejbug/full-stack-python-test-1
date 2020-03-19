@@ -14,6 +14,8 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../application.db"
 
+from application.views import index
+
 from application.leads.views import leads
 from application.touches.views import touches
 app.register_blueprint(leads, url_prefix="/leads")
