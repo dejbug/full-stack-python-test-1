@@ -4,7 +4,8 @@ from application.utils import create_secret_key_file
 create_secret_key_file(SECRET_KEY_FILE_PATH)
 
 from flask import Flask
-app = Flask(__name__, template_folder="_templates", static_folder="_static", instance_path="_instance")
+app = Flask(__name__, template_folder="_templates", static_folder="_static")
+app.config["SECRET_KEY"] = open(SECRET_KEY_FILE_PATH).read()
 
 from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect(app)
@@ -12,7 +13,6 @@ csrf = CSRFProtect(app)
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../application.db"
-app.config["SECRET_KEY"] = open(SECRET_KEY_FILE_PATH).read()
 
 from application.leads.views import leads
 from application.touches.views import touches
