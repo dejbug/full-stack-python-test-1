@@ -12,7 +12,7 @@ leads = Blueprint("leads", __name__, template_folder="_templates", static_folder
 
 @leads.route("/")
 def index():
-	return render_template("index.html")
+	return render_template("index.html", leads=models.Lead.query.all())
 
 
 @leads.route("/add", methods=['GET', 'POST'])
@@ -27,11 +27,16 @@ def add():
 		db.session.add(lead)
 		try:
 			db.session.commit()
-		except exc.SQLAlchemyError as e:
-			flash("An error occurred while adding Lead.")
+		except exc.IntegrityError as e:
+			flash("Lead already exists.")
 			print(e)
-			raise
+		except exc.SQLAlchemyError as e:
+			flash("An unknown error occurred while adding Lead.")
+			print(e)
 
 		return redirect(url_for("leads.index"))
+
+	elif form.errors:
+		flash(form.errors)
 
 	return render_template("add.html", form=form)

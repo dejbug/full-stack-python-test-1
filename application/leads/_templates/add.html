@@ -2,19 +2,25 @@
 
 {% block title %}Leads / Add{% endblock %}
 
+{% macro input(field) -%}
+{{ field.label }}: {{ field(class="form-control") }}
+{%- endmacro %}
+
 {% block content %}
+
+<div class="container">
 
 <h1>Add Lead</h1>
 
-<div class="form-wrapper">
-<form action="{{ url_for('leads.add') }}" method="POST">
+<form class="form" action="{{ url_for('leads.add') }}" method="POST">
 {{ form.hidden_tag() }}
-<div class="form-field">{{ form.name.label }}: {{ form.name }}</div>
-<div class="form-field">{{ form.company.label }}: {{ form.company }}</div>
-<div class="form-field">{{ form.phone.label }}: {{ form.phone }}</div>
-<div class="form-field">{{ form.email.label }}: {{ form.email }}</div>
+{{ input(form.name) }}
+{{ input(form.company) }}
+{{ input(form.phone) }}
+{{ input(form.email) }}
 {{ form.submit }}
 </form>
+
 </div>
 
 {% endblock %}

@@ -4,16 +4,27 @@
 
 {% block content %}
 
+<div class="container">
+
 <h1>Leads</h1>
 
 <div class="leads-add">
 	<p><a href="{{ url_for('leads.add') }}">Add</a></p>
 </div>
 
-<div class="leads">
+<table class="table table-bordered table-hover">
+	<thead>
+	</thead>
 {% for lead in leads %}
-<span class="name">{{ lead.name }}</span> | <span class="company">{{ lead.company }}</span> | <span class="phone">{{ lead.phone }}</span> | <span class="email">{{ lead.email }}</span>
+<tr>
+	<td class="name">{{ lead.name }}</td>
+	<td class="company">{{ lead.company }}</td>
+	<td class="phone">{{ lead.phone }}</td>
+	<td class="email">{{ lead.email }}</td>
+</tr>
 {% endfor %}
+</table>
+
 </div>
 
 {% endblock %}

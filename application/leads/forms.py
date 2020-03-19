@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, StringField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email
 
 from application import utils
 
@@ -12,6 +12,6 @@ class AddLeadForm(FlaskForm):
 	name = StringField("Name", validators=[DataRequired()])
 	company = StringField("Company", validators=[DataRequired()])
 	phone = StringField("Phone", validators=[DataRequired()])
-	email = StringField("Email", validators=[DataRequired()])
+	email = StringField("Email", validators=[DataRequired(), Email()])
 
 	submit = SubmitField("Add")
