@@ -12,7 +12,7 @@ leads = Blueprint("leads", __name__, template_folder="_templates", static_folder
 
 @leads.route("/")
 def index():
-	return render_template("index.html", leads=models.Lead.query.all())
+	return render_template("leads_index.html", leads=models.Lead.query.all())
 
 
 @leads.route("/add", methods=['GET', 'POST'])
@@ -34,9 +34,9 @@ def add():
 			flash("An unknown error occurred while adding Lead.")
 			print(e)
 
-		return redirect(url_for("leads.index"))
+		return redirect("leads_index.html")
 
 	elif form.errors:
 		flash(form.errors)
 
-	return render_template("add.html", form=form)
+	return render_template("leads_add.html", form=form)
