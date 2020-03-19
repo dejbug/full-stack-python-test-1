@@ -1,9 +1,28 @@
+import re
 
-def stringify(cls):
-	def _str(obj):
-		return "Touch%s" % {key: val for key, val in obj.__dict__.items() if not key.startswith("_")}
-	setattr(cls, "__str__", _str)
-	return cls
+
+class dictable:
+	def __init__(self, keypattern="", transformer=None):
+		self.matcher = re.compile(keypattern)
+		self.transformer = transformer or (lambda val: val)
+
+	def __call__(self, cls):
+		def _to_dict(obj):
+			return {key: self.transformer(val) for key, val in obj.__dict__.items() if self.matcher.match(key)}
+		setattr(cls, "to_dict", _to_dict)
+		return cls
+
+
+class printable:
+	def __init__(self, keypattern="[^_].*", transformer=None):
+		self.matcher = re.compile(keypattern)
+		self.transformer = transformer or (lambda val: val)
+
+	def __call__(self, cls):
+		def _str(obj):
+			return "%s%s" % (cls.__name__, {key: self.transformer(val) for key, val in obj.__dict__.items() if self.matcher.match(key)})
+		setattr(cls, "__str__", _str)
+		return cls
 
 
 def create_secret_key(length=32):

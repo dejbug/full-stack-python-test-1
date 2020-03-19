@@ -1,17 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, request
-from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField
-from wtforms.validators import DataRequired
+from flask import Blueprint, render_template, redirect, url_for, flash
+from sqlalchemy import exc
 
+from application import db
 
-class AddLeadForm(FlaskForm):
-
-	name = StringField("Name", validators=[DataRequired()])
-	company = StringField("Company", validators=[DataRequired()])
-	phone = StringField("Phone", validators=[DataRequired()])
-	email = StringField("Email", validators=[DataRequired()])
-
-	submit = SubmitField("Add")
+import application.leads.forms as forms
+import application.leads.models as models
 
 
 leads = Blueprint("leads", __name__, template_folder="_templates", static_folder="_static")
@@ -24,9 +17,21 @@ def index():
 
 @leads.route("/add", methods=['GET', 'POST'])
 def add():
-	form = AddLeadForm()
-	print("hi")
+	form = forms.AddLeadForm()
+
 	if form.validate_on_submit():
-		print("ho")
+
+		print(form)
+		lead = models.Lead(**form.to_dict())
+
+		db.session.add(lead)
+		try:
+			db.session.commit()
+		except exc.SQLAlchemyError as e:
+			flash("An error occurred while adding Lead.")
+			print(e)
+			raise
+
 		return redirect(url_for("leads.index"))
+
 	return render_template("add.html", form=form)

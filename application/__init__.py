@@ -11,8 +11,8 @@ from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect(app)
 
 from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../application.db"
+db = SQLAlchemy(app)
 
 from application.views import index
 

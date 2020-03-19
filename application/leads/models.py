@@ -1,6 +1,7 @@
 from application import db, utils
 
-@utils.stringify
+
+@utils.printable()
 class Lead(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)

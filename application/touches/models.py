@@ -3,7 +3,7 @@ import datetime
 from application import db, utils
 
 
-@utils.stringify
+@utils.printable()
 class Touch(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
