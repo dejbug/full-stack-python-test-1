@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block title %}Touches / Add{% endblock %}
+
+
+{% block tabs %}
+
+<li class="nav-item">
+	<a class="nav-link" href="{{ url_for('leads.index') }}">Leads</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link" href="{{ url_for('touches.index') }}">Touches</a>
+</li>
+
+{% endblock %}
+
+
+{% macro input(field) -%}
+{{ field.label }}: {{ field(class="form-control") }}
+{%- endmacro %}
+
+{% block content %}
+
+<h1>Add Touch</h1>
+
+{% endblock %}

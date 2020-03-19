@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 
+
 {% block title %}Leads / Add{% endblock %}
+
+
+{% block tabs %}
+
+<li class="nav-item">
+	<a class="nav-link" href="{{ url_for('leads.index') }}">Leads</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link" href="{{ url_for('touches.index') }}">Touches</a>
+</li>
+
+{% endblock %}
+
 
 {% macro input(field) -%}
 {{ field.label }}: {{ field(class="form-control") }}
 {%- endmacro %}
 
 {% block content %}
-
-<div class="container">
 
 <h1>Add Lead</h1>
 
@@ -21,7 +34,5 @@
 <hr>
 {{ form.submit }}
 </form>
-
-</div>
 
 {% endblock %}

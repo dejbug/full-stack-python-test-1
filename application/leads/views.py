@@ -7,7 +7,7 @@ import application.leads.forms as forms
 import application.leads.models as models
 
 
-leads = Blueprint("leads", __name__, template_folder="_templates", static_folder="_static")
+leads = Blueprint("leads", __name__)
 
 
 @leads.route("/")
