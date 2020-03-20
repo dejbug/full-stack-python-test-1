@@ -25,10 +25,27 @@
 	<p><a href="{{ url_for('touches.add') }}">Add</a></p>
 </div>
 
-<div class="touches">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Lead Id</th>
+			<th>Date</th>
+			<th>Description</th>
+		</tr>
+	</thead>
 {% for touch in touches %}
-<span class="date">{{ touch.date }}</span> | <span class="description">{{ touch.description }}</span>
+<tr>
+	<td class="touch-id">{{ touch.id }}</td>
+	<td class="touch-lead_id">{{ touch.lead_id }}
+		<span class="float-right">
+			<a href="">Filter</a> | <a href="">View</a>
+		</span>
+	</td>
+	<td class="touch-date">{{ touch.date }}</td>
+	<td class="company">{{ touch.description }}</td>
+</tr>
 {% endfor %}
-</div>
+</table>
 
 {% endblock %}

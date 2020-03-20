@@ -27,14 +27,23 @@
 
 <table class="table table-bordered table-hover">
 	<thead>
+		<tr>
+			<th></th>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Company</th>
+			<th>Phone</th>
+			<th>Email</th>
+		</tr>
 	</thead>
 {% for lead in leads %}
 <tr>
-	<td class="name">{{ lead.id }}</td>
-	<td class="name">{{ lead.name }}</td>
-	<td class="company">{{ lead.company }}</td>
-	<td class="phone">{{ lead.phone }}</td>
-	<td class="email">{{ lead.email }}</td>
+	<td class="lead-actions"><a href="">Touch</a></td>
+	<td class="lead-id">{{ lead.id }}</td>
+	<td class="lead-name">{{ lead.name }}</td>
+	<td class="lead-company">{{ lead.company }}</td>
+	<td class="lead-phone">{{ lead.phone }}</td>
+	<td class="lead-email">{{ lead.email }}</td>
 </tr>
 {% endfor %}
 </table>
