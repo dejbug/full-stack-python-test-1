@@ -7,3 +7,12 @@
 	color: grey;
 	font-weight: normal;
 }
+
+th.touch-date,
+th.lead-date {
+	width: 12em;
+}
+
+th.touch-lead_id {
+	width: 6em;
+}

@@ -30,18 +30,18 @@
 <table class="table table-bordered table-hover">
 	<thead>
 		<tr>
-			<th>Date
+			<th class="touch-date">Date
 				<span class="touch-date-actions float-right">
 					<a>UTC</a> | <a href="">Local</a>
 				</span>
 			</th>
-			<th>Description</th>
+			<th class="touch-description">Description</th>
 		</tr>
 	</thead>
 {% for touch in touches %}
 <tr>
 	<td class="touch-date">{{ touch.date }}</td>
-	<td class="company">{{ touch.description }}</td>
+	<td class="touch-description">{{ touch.description }}</td>
 </tr>
 {% endfor %}
 </table>
