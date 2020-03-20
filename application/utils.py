@@ -36,3 +36,40 @@ def create_secret_key_file(path, length=32):
 	if not exists(path) or getsize(path) < length:
 		with open(path, "w") as file:
 			file.write(create_secret_key(length))
+
+
+def add_mock_records(db):
+	import datetime
+	from sqlalchemy import exc
+	from application.leads.models import Lead
+	from application.touches.models import Touch
+
+	print("***** ADDING MOCK RECORDS *****")
+
+	dt_format = "%Y-%m-%d %H:%M:%S %Z"
+	dt = lambda s: datetime.datetime.strptime(s, dt_format)
+
+	leads = (
+		{"name": "Dejan Budimir", "company": "n/a", "phone": "0123456789", "email": "Dejan@Budimir.de"},
+		{"name": "Dejan Budimir", "company": "n/a", "phone": "0123456789", "email": "Dejan@Budimir.com"},
+	)
+
+	touches = (
+		{"date": dt("2020-03-20 10:00:00 UTC"), "description": "...", "lead_id": 1},
+		{"date": dt("2020-03-20 10:00:01 UTC"), "description": "...", "lead_id": 1},
+		{"date": dt("2020-03-20 10:00:02 UTC"), "description": "...", "lead_id": 2},
+	)
+
+	for kwargs in leads:
+		db.session.rollback()
+		db.session.add(Lead(**kwargs))
+		try: db.session.commit()
+		except exc.IntegrityError: pass
+		except exc.SQLAlchemyError as e: print(e)
+
+	for kwargs in touches:
+		db.session.rollback()
+		db.session.add(Touch(**kwargs))
+		try: db.session.commit()
+		except exc.IntegrityError: pass
+		except exc.SQLAlchemyError as e: print(e)
