@@ -14,4 +14,4 @@ class Touch(db.Model):
 
 	lead_id = db.Column(db.Integer, db.ForeignKey("lead.id"))
 
-	lead = db.relationship("Lead", backref=db.backref("touch", lazy="dynamic"))
+	lead = db.relationship("Lead", backref=db.backref("touches", lazy="dynamic"))

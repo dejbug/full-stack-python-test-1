@@ -38,7 +38,7 @@
 	</thead>
 {% for lead in leads %}
 <tr>
-	<td class="lead-actions"><a href="">Touch</a></td>
+	<td class="lead-actions"><a href="{{ url_for('touches.by_lead_id', id=lead.id) }}">Touch</a></td>
 	<td class="lead-id">{{ lead.id }}</td>
 	<td class="lead-name">{{ lead.name }}</td>
 	<td class="lead-company">{{ lead.company }}</td>

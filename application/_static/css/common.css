@@ -1,0 +1,9 @@
+.touch-date-actions {
+	color: lightgrey;
+	font-weight: normal;
+}
+
+.touch-date-actions a[href] {
+	color: grey;
+	font-weight: normal;
+}
