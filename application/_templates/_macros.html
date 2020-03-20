@@ -1,0 +1,4 @@
+
+{% macro input(field) -%}
+{{ field.label }}: {{ field(class="form-control") }}
+{%- endmacro %}
