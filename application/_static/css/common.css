@@ -1,3 +1,4 @@
+
 .touch-date-actions {
 	color: lightgrey;
 	font-weight: normal;
@@ -15,4 +16,22 @@ th.lead-date {
 
 th.touch-lead_id {
 	width: 6em;
+}
+
+.svg-triangle {
+	stroke-width: 2;
+	stroke: black;
+	fill: none;
+}
+
+.svg-triangle-active {
+	stroke-width: 2;
+	stroke: black;
+	fill: black;
+}
+
+.svg-triangle:hover {
+	stroke-width: 2;
+	stroke: blue;
+	fill: blue;
 }

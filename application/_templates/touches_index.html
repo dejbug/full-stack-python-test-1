@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% from "_macros.html" import svg_triangle %}
 
 
 {% block title %}Leads{% endblock %}
@@ -30,7 +31,12 @@
 	<thead>
 		<tr>
 			<th class="touch-lead_id">Lead-Id</th>
-			<th class="touch-date">Date
+			<th class="touch-date">
+				<span>
+					<a>{{ svg_triangle(active=True) }}</a>
+					<a href="">{{ svg_triangle(flipped=True) }}</a>
+				</span>
+				Date
 				<span class="touch-date-actions float-right">
 					<a>UTC</a> | <a href="">Local</a>
 				</span>
@@ -45,7 +51,7 @@
 			<a href="{{ url_for('leads.by_id', id=touch.lead_id) }}">View</a>
 		</span>
 	</td>
-	<td class="touch-date">{{ touch.date.strftime('%Y-%m-%d / %H-%M-%S') }}</td>
+	<td class="touch-date">{{ touch.date|dateform }}</td>
 	<td class="touch-description">{{ touch.description }}</td>
 </tr>
 {% endfor %}

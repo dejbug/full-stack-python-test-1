@@ -2,3 +2,13 @@
 {% macro input(field) -%}
 {{ field.label }}: {{ field(class="form-control") }}
 {%- endmacro %}
+
+{% macro path_svg(name) -%}
+"{{ url_for('static', filename='images/' ~ name ~ '.svg') }}"
+{%- endmacro %}
+
+{% macro svg_triangle(active=False, flipped=False) -%}
+<svg width="1ex" height="1ex" viewBox="0 0 10 10" class="svg-triangle{% if active %}{{ '-active' }}{% endif %}">
+<polygon points="0 10 5 0 10 10 0 10"{% if flipped %} transform="rotate(180,5,5)"{% endif %}></polygon>
+</svg>
+{%- endmacro %}

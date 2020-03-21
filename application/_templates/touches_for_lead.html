@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% from "_macros.html" import svg_triangle %}
 
 
 {% block title %}Touches for Lead #{{ lead.id }}{% endblock %}
@@ -31,7 +32,12 @@
 <table class="table table-bordered table-hover">
 	<thead>
 		<tr>
-			<th class="touch-date">Date
+			<th class="touch-date">
+				<span>
+					<a>{{ svg_triangle(active=True) }}</a>
+					<a href="">{{ svg_triangle(flipped=True) }}</a>
+				</span>
+				Date
 				<span class="touch-date-actions float-right">
 					<a>UTC</a> | <a href="">Local</a>
 				</span>
