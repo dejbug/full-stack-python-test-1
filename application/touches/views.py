@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, request, render_template, redirect, url_for, flash
 from sqlalchemy import exc
 
 from application import db
@@ -13,13 +13,15 @@ touches = Blueprint("touches", __name__)
 
 @touches.route("/")
 def index():
-	return render_template("touches_index.html", touches=Touch.query.all())
+	dates_order = request.args.get("dates_order", "ascending")
+	return render_template("touches_index.html", touches=Touch.query.all(), dates_order=dates_order)
 
 
 @touches.route("/lead/<lead_id>")
 def for_lead(lead_id):
+	dates_order = request.args.get("dates_order", "ascending")
 	lead = Lead.query.get_or_404(lead_id)
-	return render_template("touches_for_lead.html", lead=lead, touches=lead.touches)
+	return render_template("touches_for_lead.html", lead=lead, touches=lead.touches, dates_order=dates_order)
 
 
 @touches.route("/add")

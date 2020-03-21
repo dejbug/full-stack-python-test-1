@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% from "_macros.html" import svg_triangle %}
+{% from "_macros.html" import svg_triangle_a %}
 
 
 {% block title %}Touches for Lead #{{ lead.id }}{% endblock %}
@@ -34,8 +34,17 @@
 		<tr>
 			<th class="touch-date">
 				<span>
-					<a>{{ svg_triangle(active=True) }}</a>
-					<a href="">{{ svg_triangle(flipped=True) }}</a>
+					{% if dates_order == 'descending' %}
+
+					{{ svg_triangle_a(url=url_for('touches.for_lead', lead_id=lead.id)) }}
+					{{ svg_triangle_a(flipped=True, active=True) }}
+
+					{% else %}
+
+					{{ svg_triangle_a(active=True) }}
+					{{ svg_triangle_a(flipped=True, url=url_for('touches.for_lead', lead_id=lead.id, dates_order='descending')) }}
+
+					{% endif %}
 				</span>
 				Date
 				<span class="touch-date-actions float-right">
@@ -45,7 +54,7 @@
 			<th class="touch-description">Description</th>
 		</tr>
 	</thead>
-{% for touch in touches %}
+{% for touch in touches|date_ordered(dates_order == 'descending') %}
 <tr>
 	<td class="touch-date">{{ touch.date|dateform }}</td>
 	<td class="touch-description">{{ touch.description }}</td>

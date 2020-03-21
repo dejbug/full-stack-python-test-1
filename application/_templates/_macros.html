@@ -12,3 +12,7 @@
 <polygon points="0 10 5 0 10 10 0 10"{% if flipped %} transform="rotate(180,5,5)"{% endif %}></polygon>
 </svg>
 {%- endmacro %}
+
+{% macro svg_triangle_a(active=False, flipped=False, url=None) -%}
+<a{% if url %} href="{{ url }}"{% endif %}>{{ svg_triangle(active, flipped) }}</a>
+{%- endmacro %}
