@@ -41,7 +41,7 @@
 	</thead>
 {% for touch in touches %}
 <tr>
-	<td class="touch-date">{{ touch.date }}</td>
+	<td class="touch-date">{{ touch.date|dateform }}</td>
 	<td class="touch-description">{{ touch.description }}</td>
 </tr>
 {% endfor %}

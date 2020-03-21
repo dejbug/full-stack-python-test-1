@@ -16,3 +16,10 @@ def length(obj):
 	except: print_exc()
 
 	raise Error("unable to determine length of object")
+
+
+@app.template_filter()
+def dateform(obj, format="%Y-%m-%d / %H-%M-%S"):
+
+	try: return obj.strftime(format)
+	except: print_exc()
