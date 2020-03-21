@@ -27,6 +27,7 @@
 	<p><a href="{{ url_for('touches.add_for_lead', id=lead.id) }}">Add</a></p>
 </div>
 
+{% if touches|length %}
 <table class="table table-bordered table-hover">
 	<thead>
 		<tr>
@@ -45,5 +46,8 @@
 </tr>
 {% endfor %}
 </table>
+{% else %}
+<div>No touches yet.</div>
+{% endif %}
 
 {% endblock %}

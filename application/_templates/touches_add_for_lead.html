@@ -1,0 +1,36 @@
+{% extends "_base.html" %}
+{% from "_macros.html" import input %}
+
+
+{% block title %}Add Touch for Lead #{{ lead.id }}{% endblock %}
+
+
+{% block tabs %}
+
+<li class="nav-item">
+	<a class="nav-link" href="{{ url_for('leads.index') }}">Leads</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link" href="{{ url_for('touches.index') }}">Touches</a>
+</li>
+
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Touches / Add (for Lead #{{ lead.id }})</h1>
+
+<div>{{ lead }}</div>
+
+
+<form class="form" action="{{ url_for('touches.add_for_lead', id=lead.id) }}" method="POST">
+{{ form.hidden_tag() }}
+{{ input(form.description) }}
+<hr>
+{{ form.submit }}
+</form>
+
+
+{% endblock %}

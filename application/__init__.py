@@ -20,3 +20,5 @@ from application.leads.views import leads
 from application.touches.views import touches
 app.register_blueprint(leads, url_prefix="/leads")
 app.register_blueprint(touches, url_prefix="/touches")
+
+from application.custom_template_filters import *
