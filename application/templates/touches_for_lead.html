@@ -1,21 +1,11 @@
 {% extends "_base.html" %}
-{% from "_macros.html" import svg_triangle_a %}
+{% from "_macros.html" import nav, svg_triangle_a %}
 
 
 {% block title %}Touches for Lead #{{ lead.id }}{% endblock %}
 
 
-{% block tabs %}
-
-<li class="nav-item">
-	<a class="nav-link" href="{{ url_for('leads.index') }}">Leads</a>
-</li>
-
-<li class="nav-item">
-	<a class="nav-link" href="{{ url_for('touches.index') }}">Touches</a>
-</li>
-
-{% endblock %}
+{% block tabs %}{{ nav() }}{% endblock %}
 
 
 {% block content %}
