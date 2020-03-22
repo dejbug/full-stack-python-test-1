@@ -41,8 +41,8 @@ def create_secret_key_file(path, length=32):
 def add_mock_records(db):
 	import datetime
 	from sqlalchemy import exc
-	from application.leads.models import Lead
-	from application.touches.models import Touch
+	from application.routes.leads.models import Lead
+	from application.routes.touches.models import Touch
 
 	print("***** ADDING MOCK RECORDS *****")
 

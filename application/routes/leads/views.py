@@ -3,8 +3,8 @@ from sqlalchemy import exc
 
 from application import db
 
-from application.leads.models import Lead
-from application.leads.forms import AddLeadForm
+from application.routes.leads.models import Lead
+from application.routes.leads.forms import AddLeadForm
 
 
 leads = Blueprint("leads", __name__)

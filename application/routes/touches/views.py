@@ -3,9 +3,9 @@ from sqlalchemy import exc
 
 from application import db
 
-from application.leads.models import Lead
-from application.touches.models import Touch
-from application.touches.forms import AddTouchForm
+from application.routes.leads.models import Lead
+from application.routes.touches.models import Touch
+from application.routes.touches.forms import AddTouchForm
 
 
 touches = Blueprint("touches", __name__)
