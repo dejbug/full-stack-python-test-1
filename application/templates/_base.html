@@ -10,15 +10,16 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
 </head>
 <body>
+
 	<div class="container">
 
 		<ul class="nav">
-			{% block tabs %}{% endblock %}
+			{%- block tabs %}{% endblock %}
 		</ul>
 
-		{% for message in get_flashed_messages() %}
+		{%- for message in get_flashed_messages() %}
 		<div class="flash">{{ message }}</div>
-		{% endfor %}
+		{% endfor -%}
 
 		{% block content %}{% endblock %}
 

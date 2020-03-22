@@ -1,30 +1,8 @@
 
-{% macro input(field) -%}
-{{ field.label }}: {{ field(class="form-control") }}
-{%- endmacro %}
+{% macro nav(active=0) %}
 
-
-{% macro path_svg(name) -%}
-"{{ url_for('static', filename='images/' ~ name ~ '.svg') }}"
-{%- endmacro %}
-
-
-{% macro svg_triangle(active=False, flipped=False) -%}
-<svg width="1ex" height="1ex" viewBox="0 0 10 10" class="svg-triangle{% if active %}{{ '-active' }}{% endif %}">
-<polygon points="0 10 5 0 10 10 0 10"{% if flipped %} transform="rotate(180,5,5)"{% endif %}></polygon>
-</svg>
-{%- endmacro %}
-
-
-{% macro svg_triangle_a(active=False, flipped=False, url=None) -%}
-<a{% if url %} href="{{ url }}"{% endif %}>{{ svg_triangle(active, flipped) }}</a>
-{%- endmacro %}
-
-
-{%- macro nav(active=0) %}
-
-{% set class1 = "nav-link disabled" if active == 1 else "nav-link" %}
-{% set class2 = "nav-link disabled" if active == 2 else "nav-link" %}
+{%- set class1 = "nav-link disabled" if active == 1 else "nav-link" %}
+{%- set class2 = "nav-link disabled" if active == 2 else "nav-link" %}
 
 <li class="nav-item">
 	<a class="{{ class1 }}" href="{{ url_for('leads.index') }}">Leads</a>
@@ -34,7 +12,24 @@
 	<a class="{{ class2 }}" href="{{ url_for('touches.index') }}">Touches</a>
 </li>
 
-{% endmacro -%}
+{% endmacro %}
+
+
+{% macro input(field) %}
+{{ field.label }}: {{ field(class="form-control") }}
+{% endmacro %}
+
+
+{% macro svg_triangle(active=False, flipped=False) %}
+<svg width="1ex" height="1ex" viewBox="0 0 10 10" class="svg-triangle{% if active %}{{ '-active' }}{% endif %}">
+<polygon points="0 10 5 0 10 10 0 10"{% if flipped %} transform="rotate(180,5,5)"{% endif %}></polygon>
+</svg>
+{% endmacro %}
+
+
+{% macro svg_triangle_a(active=False, flipped=False, url=None) %}
+<a{% if url %} href="{{ url }}"{% endif %}>{{ svg_triangle(active, flipped) }}</a>
+{% endmacro %}
 
 
 {% macro date_sorting_buttons(dates_order='ascending', endpoint='') %}
@@ -51,4 +46,4 @@
 
 {% endif %}
 
-{% endmacro -%}
+{% endmacro %}
