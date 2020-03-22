@@ -1,7 +1,7 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+from flask import Blueprint, request, render_template, redirect, url_for, flash, session
 from sqlalchemy import exc
 
-from application import db
+from application import db, utils
 
 from application.routes.leads.models import Lead
 from application.routes.touches.models import Touch
@@ -13,15 +13,22 @@ touches = Blueprint("touches", __name__)
 
 @touches.route("/")
 def index():
-	dates_order = request.args.get("dates_order", "ascending")
-	return render_template("touches_index.html", touches=Touch.query.all(), dates_order=dates_order)
+
+	if utils.update_session_from_request():
+		return redirect(url_for("touches.index"))
+
+	return render_template("touches_index.html", touches=Touch.query.all(), dates_order=session["dates_order"], dates_tz=session["dates_tz"])
 
 
 @touches.route("/lead/<lead_id>")
 def for_lead(lead_id):
-	dates_order = request.args.get("dates_order", "ascending")
+
+	if utils.update_session_from_request():
+		return redirect(url_for("touches.for_lead", lead_id=lead_id))
+
 	lead = Lead.query.get_or_404(lead_id)
-	return render_template("touches_for_lead.html", lead=lead, touches=lead.touches, dates_order=dates_order)
+
+	return render_template("touches_for_lead.html", lead=lead, touches=lead.touches, dates_order=session["dates_order"], dates_tz=session["dates_tz"])
 
 
 @touches.route("/add")

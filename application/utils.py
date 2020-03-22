@@ -38,6 +38,31 @@ def create_secret_key_file(path, length=32):
 			file.write(create_secret_key(length))
 
 
+def init_session():
+	from flask import session
+	if not "dates_order" in session: session["dates_order"] = None
+	if not "dates_tz" in session: session["dates_tz"] = None
+
+
+def update_session_from_request():
+	from flask import session, request
+
+	dates_order = request.args.get("dates_order")
+	dates_tz = request.args.get("dates_tz")
+
+	need_redirect = False
+
+	if dates_order:
+		session["dates_order"] = dates_order
+		need_redirect = True
+
+	if dates_tz:
+		session["dates_tz"] = dates_tz
+		need_redirect = True
+
+	return need_redirect
+
+
 def add_mock_records(db):
 	import datetime
 	from sqlalchemy import exc

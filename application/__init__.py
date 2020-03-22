@@ -6,6 +6,7 @@ create_secret_key_file(SECRET_KEY_FILE_PATH)
 
 from flask import Flask
 app = Flask(__name__)
+app.config["LOCAL_TIMEZONE"] = "Europe/Berlin"
 app.config["SECRET_KEY"] = open(SECRET_KEY_FILE_PATH).read()
 
 from flask_wtf.csrf import CSRFProtect

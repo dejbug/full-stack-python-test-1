@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% from "_macros.html" import nav, date_sorting_buttons %}
+{% from "_macros.html" import nav, date_sorting_buttons, date_timezone_buttons %}
 
 
 {% block title %}Touches for Lead #{{ lead.id }}{% endblock %}
@@ -23,18 +23,16 @@
 	<thead>
 		<tr>
 			<th class="touch-date">
-				<span>{{ date_sorting_buttons(dates_order, 'touches.for_lead', lead_id=lead.id) }}</span>
+				<span>{{ date_sorting_buttons('touches.for_lead', lead_id=lead.id, dates_order=dates_order) }}</span>
 				Date
-				<span class="touch-date-actions float-right">
-					<a>UTC</a> | <a href="">Local</a>
-				</span>
+				<span class="touch-timezone-buttons float-right">{{ date_timezone_buttons('touches.for_lead', lead_id=lead.id, dates_tz=dates_tz) }}</span>
 			</th>
 			<th class="touch-description">Description</th>
 		</tr>
 	</thead>
-{% for touch in touches|date_ordered(dates_order == 'descending') %}
+{% for touch in touches|date_ordered(dates_order) %}
 <tr>
-	<td class="touch-date">{{ touch.date|dateform }}</td>
+	<td class="touch-date">{{ touch.date|datezone(dates_tz)|dateform() }}</td>
 	<td class="touch-description">{{ touch.description }}</td>
 </tr>
 {% endfor %}

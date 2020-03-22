@@ -1,5 +1,7 @@
 from traceback import print_exc
 
+from pytz import timezone
+
 from application import app
 
 
@@ -19,6 +21,18 @@ def length(obj):
 
 
 @app.template_filter()
+def datezone(obj, tz="UTC"):
+
+	if not tz or tz == "local":
+		tz = app.config["LOCAL_TIMEZONE"]
+
+	try: return obj.astimezone(timezone(tz))
+	except: print_exc()
+
+	return obj
+
+
+@app.template_filter()
 def dateform(obj, format="%Y-%m-%d - %H:%M:%S"):
 
 	try: return obj.strftime(format)
@@ -28,7 +42,9 @@ def dateform(obj, format="%Y-%m-%d - %H:%M:%S"):
 
 
 @app.template_filter()
-def date_ordered(obj, reverse=False):
+def date_ordered(obj, dates_order=None):
+
+	reverse = dates_order == "descending"
 
 	try: return sorted(obj, key=lambda it: it.date, reverse=reverse)
 	except: print_exc()

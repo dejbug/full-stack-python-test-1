@@ -1,10 +1,10 @@
 
-.touch-date-actions {
+.touch-timezone-buttons {
 	color: lightgrey;
 	font-weight: normal;
 }
 
-.touch-date-actions a[href] {
+.touch-timezone-buttons a[href] {
 	color: grey;
 	font-weight: normal;
 }
