@@ -15,12 +15,6 @@ def index():
 	return render_template("leads_index.html", leads=Lead.query.all())
 
 
-@leads.route("/<id>")
-def by_id(id):
-	lead = Lead.query.get_or_404(id)
-	return str(lead)
-
-
 @leads.route("/add", methods=['GET', 'POST'])
 def add():
 	form = AddLeadForm()

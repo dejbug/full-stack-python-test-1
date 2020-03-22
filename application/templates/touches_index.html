@@ -57,7 +57,7 @@
 <tr>
 	<td class="touch-lead_id">{{ touch.lead_id }}
 		<span class="touch-lead_id-actions float-right">
-			<a href="{{ url_for('leads.by_id', id=touch.lead_id) }}">View</a>
+			<a href="{{ url_for('touches.for_lead', lead_id=touch.lead_id) }}">View</a>
 		</span>
 	</td>
 	<td class="touch-date">{{ touch.date|dateform }}</td>
