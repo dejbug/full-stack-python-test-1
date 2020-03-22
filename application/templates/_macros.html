@@ -35,3 +35,20 @@
 </li>
 
 {% endmacro -%}
+
+
+{% macro date_sorting_buttons(dates_order='ascending', endpoint='') %}
+
+{% if dates_order == 'descending' %}
+
+{{ svg_triangle_a(url=url_for(endpoint, **kwargs)) }}
+{{ svg_triangle_a(flipped=True, active=True) }}
+
+{% else %}
+
+{{ svg_triangle_a(active=True) }}
+{{ svg_triangle_a(flipped=True, url=url_for(endpoint, dates_order='descending', **kwargs)) }}
+
+{% endif %}
+
+{% endmacro -%}

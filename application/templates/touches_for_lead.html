@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% from "_macros.html" import nav, svg_triangle_a %}
+{% from "_macros.html" import nav, date_sorting_buttons %}
 
 
 {% block title %}Touches for Lead #{{ lead.id }}{% endblock %}
@@ -23,19 +23,7 @@
 	<thead>
 		<tr>
 			<th class="touch-date">
-				<span>
-					{% if dates_order == 'descending' %}
-
-					{{ svg_triangle_a(url=url_for('touches.for_lead', lead_id=lead.id)) }}
-					{{ svg_triangle_a(flipped=True, active=True) }}
-
-					{% else %}
-
-					{{ svg_triangle_a(active=True) }}
-					{{ svg_triangle_a(flipped=True, url=url_for('touches.for_lead', lead_id=lead.id, dates_order='descending')) }}
-
-					{% endif %}
-				</span>
+				<span>{{ date_sorting_buttons(dates_order, 'touches.for_lead', lead_id=lead.id) }}</span>
 				Date
 				<span class="touch-date-actions float-right">
 					<a>UTC</a> | <a href="">Local</a>
