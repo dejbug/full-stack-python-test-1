@@ -19,7 +19,7 @@ def length(obj):
 
 
 @app.template_filter()
-def dateform(obj, format="%Y-%m-%d / %H-%M-%S"):
+def dateform(obj, format="%Y-%m-%d - %H:%M:%S"):
 
 	try: return obj.strftime(format)
 	except: print_exc()

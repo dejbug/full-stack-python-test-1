@@ -9,9 +9,12 @@
 	font-weight: normal;
 }
 
-th.touch-date,
-th.lead-date {
-	width: 12em;
+th.touch-date {
+	width: 11.5em;
+}
+
+td.touch-date {
+	color: grey;
 }
 
 th.touch-lead_id {
