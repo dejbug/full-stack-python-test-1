@@ -1,4 +1,4 @@
-import re
+import re, calendar, datetime, time, pytz
 
 
 class dictable:
@@ -63,16 +63,20 @@ def update_session_from_request():
 	return need_redirect
 
 
+def utc(s, format="%Y-%m-%d %H:%M:%S"):
+	return datetime.datetime.fromtimestamp(calendar.timegm(time.strptime(s, format)[0:6]))
+
+
+def utcnow():
+	return datetime.datetime.fromtimestamp(time.time()).replace(tzinfo=pytz.timezone("UTC"))
+
+
 def add_mock_records(db):
-	import datetime
 	from sqlalchemy import exc
 	from application.routes.leads.models import Lead
 	from application.routes.touches.models import Touch
 
 	print("***** ADDING MOCK RECORDS *****")
-
-	dt_format = "%Y-%m-%d %H:%M:%S %Z"
-	dt = lambda s: datetime.datetime.strptime(s, dt_format)
 
 	leads = (
 		{"name": "Dejan Budimir", "company": "n/a", "phone": "0123456789", "email": "Dejan@Budimir.de"},
@@ -80,9 +84,9 @@ def add_mock_records(db):
 	)
 
 	touches = (
-		{"date": dt("2020-03-20 10:00:00 UTC"), "description": "...", "lead_id": 1},
-		{"date": dt("2020-03-20 10:00:01 UTC"), "description": "...", "lead_id": 1},
-		{"date": dt("2020-03-20 10:00:02 UTC"), "description": "...", "lead_id": 2},
+		{"date": utc("2020-03-20 10:00:00"), "description": "...", "lead_id": 1},
+		{"date": utc("2020-03-20 10:00:01"), "description": "...", "lead_id": 1},
+		{"date": utc("2020-03-20 10:00:02"), "description": "...", "lead_id": 2},
 	)
 
 	for kwargs in leads:
