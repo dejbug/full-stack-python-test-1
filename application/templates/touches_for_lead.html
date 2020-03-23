@@ -12,7 +12,14 @@
 
 <h1>Touches (for Lead #{{ lead.id }})</h1>
 
-<div>{{ lead }}</div>
+<table class="table table-bordered">
+	<tr>
+		<td class="lead-name">{{ lead.name }}</td>
+		<td class="lead-company">{{ lead.company }}</td>
+		<td class="lead-phone">{{ lead.phone }}</td>
+		<td class="lead-email">{{ lead.email }}</td>
+	</tr>
+</table>
 
 <div class="touches-add">
 	<p><a href="{{ url_for('touches.add_for_lead', id=lead.id) }}">Add</a></p>
