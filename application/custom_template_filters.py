@@ -11,10 +11,10 @@ class Error(Exception): pass
 @app.template_filter()
 def length(obj):
 
-	try: return obj.count()
-	except: print_exc()
+	if hasattr(obj, "__len__"):
+		return len(obj)
 
-	try: return len(obj)
+	try: return obj.count()
 	except: print_exc()
 
 	raise Error("unable to determine length of object")
