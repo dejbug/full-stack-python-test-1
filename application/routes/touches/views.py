@@ -33,7 +33,8 @@ def for_lead(lead_id):
 
 @touches.route("/add")
 def add():
-	return render_template("touches_add.html")
+	form = AddTouchForm()
+	return render_template("touches_add.html", form=form)
 
 
 @touches.route("/add/lead/<id>", methods=['GET', 'POST'])

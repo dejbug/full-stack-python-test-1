@@ -2,7 +2,7 @@
 {% from "_macros.html" import nav, input %}
 
 
-{% block title %}Touches / Add{% endblock %}
+{% block title %}Add Touch{% endblock %}
 
 
 {% block tabs %}{{ nav() }}{% endblock %}
@@ -10,6 +10,14 @@
 
 {% block content %}
 
-<h1>Add Touch</h1>
+<form class="form" action="{{ url_for('touches.add') }}" method="POST">
+{{ form.hidden_tag() }}
+
+<label for="lead">Lead</label>: <input class="form-control" id="lead" name="lead" required type="text" value="">
+
+{{ input(form.description) }}
+<hr>
+{{ form.submit }}
+</form>
 
 {% endblock %}

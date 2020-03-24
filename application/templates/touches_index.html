@@ -2,15 +2,13 @@
 {% from "_macros.html" import nav, date_sorting_buttons, date_timezone_buttons %}
 
 
-{% block title %}Leads{% endblock %}
+{% block title %}Touches{% endblock %}
 
 
 {% block tabs %}{{ nav(active=2) }}{% endblock %}
 
 
 {% block content %}
-
-<h1>Touches</h1>
 
 <div class="touches-add">
 	<p><a href="{{ url_for('touches.add') }}">Add</a></p>

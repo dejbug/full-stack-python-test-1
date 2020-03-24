@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% from "_macros.html" import nav, date_sorting_buttons, date_timezone_buttons %}
+{% from "_macros.html" import nav, lead_info, date_sorting_buttons, date_timezone_buttons %}
 
 
 {% block title %}Touches for Lead #{{ lead.id }}{% endblock %}
@@ -10,16 +10,7 @@
 
 {% block content %}
 
-<h1>Touches (for Lead #{{ lead.id }})</h1>
-
-<table class="table table-bordered">
-	<tr>
-		<td class="lead-name">{{ lead.name }}</td>
-		<td class="lead-company">{{ lead.company }}</td>
-		<td class="lead-phone">{{ lead.phone }}</td>
-		<td class="lead-email">{{ lead.email }}</td>
-	</tr>
-</table>
+{{ lead_info(lead) }}
 
 <div class="touches-add">
 	<p><a href="{{ url_for('touches.add_for_lead', id=lead.id) }}">Add</a></p>

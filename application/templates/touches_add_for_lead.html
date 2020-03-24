@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% from "_macros.html" import nav, input %}
+{% from "_macros.html" import nav, lead_info, input %}
 
 
 {% block title %}Add Touch for Lead #{{ lead.id }}{% endblock %}
@@ -10,10 +10,7 @@
 
 {% block content %}
 
-<h1>Touches / Add (for Lead #{{ lead.id }})</h1>
-
-<div>{{ lead }}</div>
-
+{{ lead_info(lead) }}
 
 <form class="form" action="{{ url_for('touches.add_for_lead', id=lead.id) }}" method="POST">
 {{ form.hidden_tag() }}

@@ -2,15 +2,13 @@
 {% from "_macros.html" import nav, input %}
 
 
-{% block title %}Leads / Add{% endblock %}
+{% block title %}Add Lead{% endblock %}
 
 
 {% block tabs %}{{ nav() }}{% endblock %}
 
 
 {% block content %}
-
-<h1>Add Lead</h1>
 
 <form class="form" action="{{ url_for('leads.add') }}" method="POST">
 {{ form.hidden_tag() }}

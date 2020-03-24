@@ -62,3 +62,17 @@
 {% endif %}
 
 {% endmacro %}
+
+
+{% macro lead_info(lead) %}
+
+<table class="table table-bordered">
+	<tr>
+		<td class="lead-name">{{ lead.name }}</td>
+		<td class="lead-company">{{ lead.company }}</td>
+		<td class="lead-phone">{{ lead.phone }}</td>
+		<td class="lead-email">{{ lead.email }}</td>
+	</tr>
+</table>
+
+{% endmacro %}
