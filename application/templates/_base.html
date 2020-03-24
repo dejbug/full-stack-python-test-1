@@ -6,7 +6,8 @@
 
 	<title>{% block title %}{% endblock %}</title>
 
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap-4.4.1-dist/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/jquery-ui-1.12.1/jquery-ui.min.css') }}"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
 </head>
 <body>
@@ -27,8 +28,12 @@
 
 	</div>
 
-	<script src="{{ url_for('static', filename='js/vendor/jquery-3.4.1.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/vendor/popper.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/jquery-3.4.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/popper.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/bootstrap-4.4.1-dist/js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/jquery-ui-1.12.1/jquery-ui.min.js') }}"></script>
+
+	{% block scripts %}{% endblock %}
+
 </body>
 </html>

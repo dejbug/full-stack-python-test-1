@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, jsonify
 from sqlalchemy import exc
 
 from application import db
@@ -40,3 +40,9 @@ def add():
 		flash(form.errors)
 
 	return render_template("leads_add.html", form=form)
+
+
+@leads.route("/json/names")
+def json_names():
+	names = tuple("#%d - %s <%s> {%s}" % (int(lead.id), lead.name, lead.email, lead.company) for lead in Lead.query.all())
+	return jsonify(names)

@@ -21,3 +21,16 @@
 </form>
 
 {% endblock %}
+
+
+{% block scripts %}
+
+<script>
+	$(function() {
+		$("#lead").autocomplete({
+			source: "{{ url_for('leads.json_names') }}"
+		});
+	});
+</script>
+
+{% endblock %}
