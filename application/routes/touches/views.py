@@ -5,7 +5,7 @@ from application import db, utils
 
 from application.routes.leads.models import Lead
 from application.routes.touches.models import Touch
-from application.routes.touches.forms import AddTouchForm
+from application.routes.touches.forms import AddTouchForm, AddTouchForm2
 
 
 touches = Blueprint("touches", __name__)
@@ -31,9 +31,21 @@ def for_lead(lead_id):
 	return render_template("touches_for_lead.html", lead=lead, touches=lead.touches, dates_order=session["dates_order"], dates_tz=session["dates_tz"])
 
 
-@touches.route("/add")
+@touches.route("/add", methods=["GET", "POST"])
 def add():
-	form = AddTouchForm()
+	form = AddTouchForm2()
+
+	if form.validate_on_submit():
+		print(form)
+
+		lead_id = form.extract_lead_id()
+
+		if lead_id:
+
+			# TODO: Add Touch to database.
+
+			return redirect(url_for("touches.for_lead", lead_id=lead_id))
+
 	return render_template("touches_add.html", form=form)
 
 
