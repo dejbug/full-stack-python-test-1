@@ -16,8 +16,8 @@ class AddTouchForm(FlaskForm):
 	submit = SubmitField("Add")
 
 
-@utils.dictable("lead_query|description", lambda val: val.data)
-@utils.printable("lead_query|description", lambda val: val.data)
+@utils.dictable("lead_id|description", lambda val: val.data)
+@utils.printable("lead_id|description", lambda val: val.data)
 class AddTouchForm2(FlaskForm):
 
 	lead_query = StringField("Lead", validators=[DataRequired()])
@@ -25,7 +25,10 @@ class AddTouchForm2(FlaskForm):
 
 	submit = SubmitField("Add")
 
+	@property
+	def lead_id(self):
+		return self.extract_lead_id()
+
 	def extract_lead_id(self):
-		x = re.search(r'#(\d+)', self.lead_query.data)
-		if x:
-			return int(x.group(1))
+		x = re.search(r'^#(\d+)', self.lead_query.data)
+		if x: return int(x.group(1))

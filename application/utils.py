@@ -1,26 +1,62 @@
 import re, calendar, datetime, time, pytz
 
 
+def get_key_filtered_dict(x, matcher=lambda key: True):
+	return {k: v for k, v in x.__dict__.items() if matcher(k)}
+
+
+def get_key_filtered_properties(obj, matcher=lambda key: True):
+	assert not isinstance(obj, type), "must be object, not class"
+	def _fix(v):
+		v = v.fget(obj)
+		return v if not callable(v) else v()
+	d = get_key_filtered_dict(type(obj), matcher)
+	return {k: _fix(v) for k, v in d.items() if isinstance(v, property)}
+
+
+def get_full_dict(obj, matcher=lambda key: True):
+	d = get_key_filtered_dict(obj, matcher)
+	if not isinstance(obj, type):
+		cd = get_key_filtered_properties(obj, matcher)
+		d.update(cd)
+	return d
+
+
+def dict_safe_transform(d, transformer=lambda val: val):
+	def _transformer(val):
+		try: return transformer(val)
+		except: return val
+	return {k: _transformer(v) for k, v in d.items()}
+
+
 class dictable:
+
 	def __init__(self, keypattern="", transformer=None):
 		self.matcher = re.compile(keypattern)
 		self.transformer = transformer or (lambda val: val)
 
 	def __call__(self, cls):
 		def _to_dict(obj):
-			return {key: self.transformer(val) for key, val in obj.__dict__.items() if self.matcher.match(key)}
+			d = get_full_dict(obj, self.matcher.match)
+			d = dict_safe_transform(d, self.transformer)
+			return d
+
 		setattr(cls, "to_dict", _to_dict)
 		return cls
 
 
 class printable:
+
 	def __init__(self, keypattern="[^_].*", transformer=None):
 		self.matcher = re.compile(keypattern)
 		self.transformer = transformer or (lambda val: val)
 
 	def __call__(self, cls):
 		def _str(obj):
-			return "%s%s" % (cls.__name__, {key: self.transformer(val) for key, val in obj.__dict__.items() if self.matcher.match(key)})
+			d = get_full_dict(obj, self.matcher.match)
+			d = dict_safe_transform(d, self.transformer)
+			return "%s%s" % (cls.__name__, d)
+
 		setattr(cls, "__str__", _str)
 		return cls
 

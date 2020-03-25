@@ -36,15 +36,27 @@ def add():
 	form = AddTouchForm2()
 
 	if form.validate_on_submit():
+
 		print(form)
 
 		lead_id = form.extract_lead_id()
-
 		if lead_id:
 
-			# TODO: Add Touch to database.
+			item = Touch(**form.to_dict())
 
-			return redirect(url_for("touches.for_lead", lead_id=lead_id))
+			try:
+				db.session.add(item)
+				db.session.commit()
+			except exc.IntegrityError as e:
+				flash("Please wait a second and try again.")
+				print(e)
+				db.session.rollback()
+			except exc.SQLAlchemyError as e:
+				flash("An unknown error occurred while adding Touch.")
+				print(e)
+				db.session.rollback()
+			else:
+				return redirect(url_for("touches.index"))
 
 	return render_template("touches_add.html", form=form)
 
